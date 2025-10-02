@@ -35,6 +35,7 @@ describe('index', () => {
 
     it('is populated with weather data after form submission', () => {
       const json = {
+        cod: 200,
         name: "London",
         main: {
           temp: "50",
@@ -59,6 +60,7 @@ describe('index', () => {
 
     it('is populated with forecast data after form submission', () => {
       const json = {
+        cod: "200",
         list: [
           {dt_txt: "1", main: {temp: "50", humidity: "50"}},
           {dt_txt: "2", main: {temp: "51", humidity: "51"}},
@@ -89,6 +91,7 @@ describe('index', () => {
     })
 
     beforeEach(() => {
+      document.getElementById('city').value = '' // Clear input before each test
       fetchSpy = expect.spyOn(window, "fetch").andReturn(new Promise(() => {}))
     })
 
@@ -119,13 +122,10 @@ describe('index', () => {
 
     it('calls both fetch requests upon form submission', () => {
 
+      document.getElementById('city').value = 'London'
       const fakeEvent = {
         preventDefault: () => null,
-        target: {
-          children: [
-            {value: "London"}
-          ]
-        }
+        target: document.getElementById('cityForm')
       }
 
       handleFormSubmit(fakeEvent)
