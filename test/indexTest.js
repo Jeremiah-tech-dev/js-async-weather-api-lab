@@ -147,11 +147,7 @@ describe('index', () => {
       city.value = "New York"
       const fakeEvent = {
         preventDefault: () => null,
-        target: {
-          children: [
-            {value: "London"}
-          ]
-        }
+        target: document.getElementById('cityForm')
       }
 
       handleFormSubmit(fakeEvent)
